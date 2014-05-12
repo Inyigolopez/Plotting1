@@ -6,3 +6,18 @@ powerData$DateFormated <- as.Date(paste(powerData$Date,powerData$Time, sep =" ")
 #Select de especific date (01/02/2007 and 02/02/2007)
 data2007_02_01 <- (powerData$DateFormated < as.Date("03/02/2007 00:00:00", format= "%d/%m/%Y %H:%M:%S")) & (powerData$DateFormated > as.Date("31/01/2007 23:59:59", format= "%d/%m/%Y %H:%M:%S") )
 power <- powerData[data2007_02_01,]
+
+logicalGAP <- (!is.na(power$Global_active_power)) & (power$Global_active_power != "?")
+gapText <- power$Global_active_power[logicalGAP]
+gap <- as.numeric(as.character(gapText))
+
+
+#Open device
+png('plot2.png', width = 480, height = 480)
+# Make plot
+plot(gap, pch='.', ylab="Global active power (kilowatts)")
+lines(gap)
+#Close device~Save .png
+dev.off()
+
+
