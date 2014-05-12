@@ -11,12 +11,14 @@ logicalGAP <- (!is.na(power$Global_active_power)) & (power$Global_active_power !
 gapText <- power$Global_active_power[logicalGAP]
 gap <- as.numeric(as.character(gapText))
 
+x <- power$DateFormated
 
 #Open device
 png('plot2.png', width = 480, height = 480)
 # Make plot
-plot(gap, pch='.', ylab="Global active power (kilowatts)")
-lines(gap)
+plot(x, gap, pch='.', ylab="Global active power (kilowatts)")
+lines(x,gap)
+
 #Close device~Save .png
 dev.off()
 
