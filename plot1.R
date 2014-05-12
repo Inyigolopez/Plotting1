@@ -10,5 +10,10 @@ power <- powerData[data2007_02_01,]
 logicalGAP <- (!is.na(power$Global_active_power)) & (power$Global_active_power != "?")
 gapText <- power$Global_active_power[logicalGAP]
 gap <- as.numeric(as.character(gapText))
-hist(gap, col="red", main = "Global Active Power", xlab="Global active power (kilowatts)")
 
+#Open device
+png('plot1.png', width = 480, height = 480)
+# Make histogram
+hist(gap, col="red", main = "Global Active Power", xlab="Global active power (kilowatts)")
+#Close device~Save .png
+dev.off()
