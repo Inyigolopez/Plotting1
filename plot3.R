@@ -6,3 +6,26 @@ powerData$DateFormated <- as.Date(paste(powerData$Date,powerData$Time, sep =" ")
 #Select de especific date (01/02/2007 and 02/02/2007)
 data2007_02_01 <- (powerData$DateFormated < as.Date("03/02/2007 00:00:00", format= "%d/%m/%Y %H:%M:%S")) & (powerData$DateFormated > as.Date("31/01/2007 23:59:59", format= "%d/%m/%Y %H:%M:%S") )
 power <- powerData[data2007_02_01,]
+
+logicalESM1 <- (!is.na(power$Sub_metering_1)) & (power$Sub_metering_1 != "?")
+ESM1Text <- power$Sub_metering_1[logicalESM1]
+energySM1 <- as.numeric(as.character(ESM1Text))
+
+logicalESM2 <- (!is.na(power$Sub_metering_2)) & (power$Sub_metering_2 != "?")
+ESM2Text <- power$Sub_metering_2[logicalESM2]
+energySM2 <- as.numeric(as.character(ESM2Text))
+
+logicalESM3 <- (!is.na(power$Sub_metering_3)) & (power$Sub_metering_3 != "?")
+ESM3Text <- power$Sub_metering_3[logicalESM3]
+energySM3 <- as.numeric(as.character(ESM3Text))
+
+with({
+plot(energySM1, pch='.', ylab="Energy sub metering")
+lines(energySM1)
+plot(energySM2, pch='.', ylab="Energy sub metering", col="blue")
+lines(energySM2,col="blue")
+plot(energySM3, pch='.', ylab="Energy sub metering", col="red")
+lines(energySM3,col="red")
+})
+
+
