@@ -7,7 +7,8 @@ powerData$DateFormated <- as.Date(paste(powerData$Date,powerData$Time, sep =" ")
 data2007_02_01 <- (powerData$DateFormated < as.Date("03/02/2007 00:00:00", format= "%d/%m/%Y %H:%M:%S")) & (powerData$DateFormated > as.Date("31/01/2007 23:59:59", format= "%d/%m/%Y %H:%M:%S") )
 power <- powerData[data2007_02_01,]
 
-logicalGAP <- (!is.na(power$Global_active_power)) & (power$Global_active_power!="?")
-gap <- as.numeric(power$Global_active_power[logicalGAP])
-hist()
+logicalGAP <- (!is.na(power$Global_active_power)) & (power$Global_active_power != "?")
+gapText <- power$Global_active_power[logicalGAP]
+gap <- as.numeric(as.character(gapText))
+hist(gap, col="red", main = "Global Active Power", xlab="Global active power (kilowatts)")
 
